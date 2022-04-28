@@ -25,7 +25,6 @@ public class QueueManager {
                 .forEach(messageConsumer -> messageConsumer.consumeMessage(message));
     }
 
-
     public void getMessage(){
         synchronized (messageMessageQueue) {
             if (messageMessageQueue.size() != 0) {

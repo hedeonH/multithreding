@@ -15,7 +15,6 @@ public class MessagingService {
         queueManager.addNewConsumer(messageConsumer2);
         queueManager.addNewConsumer(messageConsumer3);
 
-
         messageProducer.start();
         messageConsumer.start();
         messageProducer2.start();
