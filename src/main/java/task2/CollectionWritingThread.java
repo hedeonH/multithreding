@@ -15,11 +15,16 @@ public class CollectionWritingThread extends Thread {
     public void run() {
         Random random = new Random();
         while (true) {
-            synchronized (collection) {
+           // synchronized (collection) {
                 Integer i = random.nextInt();
                 System.out.println("Adding integer " + i);
                 collection.add(i);
-            }
+//            try {
+//                Thread.sleep(200);
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
+          //  }
         }
     }
 }

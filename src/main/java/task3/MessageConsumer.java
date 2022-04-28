@@ -1,22 +1,30 @@
 package task3;
 
-import java.util.ArrayDeque;
+public class MessageConsumer extends Thread{
 
-public class MessageConsumer extends Thread {
-
-    private final MessageQueue<Message> messageMessageQueue;
+    private final QueueManager queueManager;
     private final String requiredTopic ;
 
-    public MessageConsumer(MessageQueue<Message> messageMessageQueue, String topic) {
-        this.messageMessageQueue = messageMessageQueue;
+    boolean consumedMessage = false;
+
+    public MessageConsumer(QueueManager queueManager, String topic) {
+        this.queueManager = queueManager;
         this.requiredTopic = topic;
     }
 
-    @Override
-    public void run(){
-        if (messageMessageQueue.isTopicMessagePresent(requiredTopic)){
-            System.out.println(messageMessageQueue.consumeMessageWithTopic(requiredTopic).toString());
-        }
+    public String getRequiredTopic() {
+        return requiredTopic;
     }
 
+    public void consumeMessage(Message message){
+        System.out.println(message.getMessage()+" with topic "+message.getTopic());
+        consumedMessage = true;
+    }
+
+    @Override
+    public  void run(){
+       while (!consumedMessage)
+            queueManager.getMessage();
+
+    }
 }

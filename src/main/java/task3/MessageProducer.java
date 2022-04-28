@@ -1,18 +1,15 @@
 package task3;
 
 import java.time.Instant;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
 
 public class MessageProducer extends Thread {
 
-    public final ArrayDeque<Message> messageMessageQueue;
+    public final MessageQueue<Message> messageMessageQueue;
 
     public final String[] topics = {"topic1", "topic2", "topic3"};
 
-    public MessageProducer(ArrayDeque<Message> messageMessageQueue) {
+    public MessageProducer(MessageQueue<Message> messageMessageQueue) {
         this.messageMessageQueue = messageMessageQueue;
     }
 

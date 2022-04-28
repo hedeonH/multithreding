@@ -2,6 +2,9 @@ package task2;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.function.Function;
 
 public class CollectionService {
@@ -14,11 +17,16 @@ public class CollectionService {
                 (int) Math.sqrt(integerCollection.stream().map(a -> a * a).reduce(0, Integer::sum).doubleValue());
 
         CollectionWritingThread collectionWritingThread = new CollectionWritingThread(collection);
-        CollectionCalculatingThread summingThread = new CollectionCalculatingThread(collection, sumCollection, "Sum is ");
-        CollectionCalculatingThread squareSumThread = new CollectionCalculatingThread(collection, squareSum, "Root square of sums is ");
+        CollectionCalculatingThread summingThread = new CollectionCalculatingThread(collection,
+                sumCollection,
+                "Sum is ");
+        CollectionCalculatingThread squareSumThread = new CollectionCalculatingThread(collection,
+                squareSum,
+                "Root square of sums is ");
+        var threadPoolExecutor = Executors.newFixedThreadPool(3);
 
-        collectionWritingThread.start();
-        summingThread.start();
-        squareSumThread.start();
+        threadPoolExecutor.execute(collectionWritingThread);
+        threadPoolExecutor.execute(summingThread);
+        threadPoolExecutor.execute(squareSumThread);
     }
 }

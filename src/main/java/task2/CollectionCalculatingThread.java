@@ -1,16 +1,17 @@
 package task2;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.Function;
 
 public class CollectionCalculatingThread extends Thread {
 
-    private Collection<Integer> collection;
-    private Function<Collection<Integer>, Integer> function;
-    private String message;
+    private final Collection<Integer> collection;
+    private final Function<Collection<Integer>, Integer> function;
+    private final String message;
 
-    public CollectionCalculatingThread(Collection<Integer> collection, Function<Collection<Integer>, Integer> supplier, String message) {
+    public CollectionCalculatingThread(Collection<Integer> collection,
+                                       Function<Collection<Integer>, Integer> supplier,
+                                       String message) {
         this.function = supplier;
         this.collection = collection;
         this.message = message;
@@ -19,9 +20,10 @@ public class CollectionCalculatingThread extends Thread {
     @Override
     public void run() {
         while (true) {
-            synchronized (collection) {
-                System.out.println(message + function.apply(collection));
-            }
+            //  synchronized (collection) {
+            Integer apply = function.apply(collection);
+            System.out.println(message + apply);
+            // }
         }
     }
 }

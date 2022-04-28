@@ -21,9 +21,7 @@ public class MapAddingSummingService {
         //testMapConcurrency(concurrentMap);
         //testMapConcurrency(synchronizedMap);
         stopWatch.stop();
-        System.out.println("Elapsed Time in minutes: " + stopWatch.getNanoTime());
-
-
+        System.out.println("Elapsed Time in nano time: " + stopWatch.getNanoTime());
     }
 
     private void testMapConcurrency(Map<Integer, Integer> map) {
