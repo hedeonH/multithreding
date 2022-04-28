@@ -27,8 +27,10 @@ public class QueueManager {
 
 
     public void getMessage(){
-       while (!messageMessageQueue.isEmpty()) {
-           publishMessage(messageMessageQueue.remove());
-       }
+        synchronized (messageMessageQueue) {
+            if (messageMessageQueue.size() != 0) {
+                publishMessage(messageMessageQueue.remove());
+            }
+        }
     }
 }

@@ -1,9 +1,9 @@
 package task3;
 
-public class MessageConsumer extends Thread{
+public class MessageConsumer extends Thread {
 
     private final QueueManager queueManager;
-    private final String requiredTopic ;
+    private final String requiredTopic;
 
     boolean consumedMessage = false;
 
@@ -16,15 +16,14 @@ public class MessageConsumer extends Thread{
         return requiredTopic;
     }
 
-    public void consumeMessage(Message message){
-        System.out.println(message.getMessage()+" with topic "+message.getTopic());
+    public void consumeMessage(Message message) {
+        System.out.println("Message in thread " + currentThread().getName() + " With message " + message.getMessage() + " with topic " + message.getTopic());
         consumedMessage = true;
     }
 
     @Override
-    public  void run(){
-       while (!consumedMessage)
+    public void run() {
+        while (!consumedMessage)
             queueManager.getMessage();
-
     }
 }
