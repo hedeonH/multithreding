@@ -1,6 +1,7 @@
 package task3;
 
 import java.util.*;
+import java.util.concurrent.locks.Condition;
 
 public class QueueManager {
 
@@ -26,10 +27,8 @@ public class QueueManager {
     }
 
     public void getMessage(){
-        synchronized (messageMessageQueue) {
             if (messageMessageQueue.size() != 0) {
                 publishMessage(messageMessageQueue.remove());
             }
-        }
     }
 }

@@ -18,7 +18,7 @@ public class MessageProducer extends Thread {
         Random random = new Random();
         for (int i = 0; i < 10; i++) {
             String topic = topics[random.nextInt(topics.length)];
-            messageMessageQueue.add(new Message(topic, "Test message in thread " + currentThread().getName(), Instant.now()));
+            messageMessageQueue.put(new Message(topic, "Test message in thread " + currentThread().getName(), Instant.now()));
             System.out.println("adding a new Message " + topic);
         }
     }
