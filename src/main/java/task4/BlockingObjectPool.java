@@ -1,9 +1,7 @@
 package task4;
 
-import java.util.Objects;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.Executors;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -15,15 +13,13 @@ public class BlockingObjectPool {
 
     private final int size;
 
-    private boolean blocked;
-
-    private BlockingQueue<Object> poolObjects;
+    private final BlockingQueue<Object> poolObjects;
 
     private final Lock lock = new ReentrantLock();
 
-    private Condition full;
+    private final Condition full = lock.newCondition();
 
-    private Condition empty;
+    private final Condition empty = lock.newCondition();
 
     /**
      * Creates filled pool of passed size * * @param size of pool
@@ -64,7 +60,7 @@ public class BlockingObjectPool {
             empty.signal();
             poolObjects.add(object);
             System.out.println("An object was added to the pool"
-                    + poolObjects.toString());
+                    + poolObjects);
         } finally {
             lock.unlock();
         }
