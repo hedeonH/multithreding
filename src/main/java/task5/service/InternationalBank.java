@@ -13,10 +13,10 @@ public class InternationalBank implements Runnable {
     private final Logger logger = Logger.getLogger(InternationalBank.class.getName());
     public static final Random random = new Random();
 
-    private final StockExchange stockExchange;
+    private final CurrencyExchange currencyExchange;
 
-    public InternationalBank(StockExchange stockExchange) {
-        this.stockExchange = stockExchange;
+    public InternationalBank(CurrencyExchange currencyExchange) {
+        this.currencyExchange = currencyExchange;
     }
 
     @Override
@@ -24,7 +24,7 @@ public class InternationalBank implements Runnable {
         for (int i = 0; i < 10000; i++) {
             var currency = values()[random.nextInt(values().length)];
             var rate = BigDecimal.valueOf(random.nextDouble(10));
-            stockExchange.changeCurrencyRate(
+            currencyExchange.changeCurrencyRate(
                     currency,
                     rate);
             logger.info(format("Changing currency {0} to rate {1}", currency, rate));

@@ -7,9 +7,9 @@ import java.math.RoundingMode;
 
 public class ExchangeService {
 
-    private final CurrencyService currencyService;
+    private final CurrencyExchange currencyService;
 
-    public ExchangeService(CurrencyService currencyService) {
+    public ExchangeService(CurrencyExchange currencyService) {
         this.currencyService = currencyService;
     }
 

@@ -22,7 +22,8 @@ public class BlockingObjectPool {
     private final Condition empty = lock.newCondition();
 
     /**
-     * Creates filled pool of passed size * * @param size of pool
+     * Creates filled pool of passed size
+     * @param size of pool
      */
     public BlockingObjectPool(int size) {
         this.size = size;
