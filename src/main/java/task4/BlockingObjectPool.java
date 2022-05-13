@@ -1,7 +1,7 @@
 package task4;
 
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -13,7 +13,7 @@ public class BlockingObjectPool {
 
     private final int size;
 
-    private final BlockingQueue<Object> poolObjects;
+    private final Queue<Object> poolObjects;
 
     private final Lock lock = new ReentrantLock();
 
@@ -26,7 +26,7 @@ public class BlockingObjectPool {
      */
     public BlockingObjectPool(int size) {
         this.size = size;
-        poolObjects = new ArrayBlockingQueue<>(size);
+        poolObjects = new PriorityQueue<>(size);
     }
 
     /**
@@ -36,7 +36,7 @@ public class BlockingObjectPool {
     public Object get() throws InterruptedException {
         lock.lockInterruptibly();
         try {
-            while (poolObjects.size() == 0) {
+            while (poolObjects.isEmpty()) {
                 empty.await();
             }
             full.signal();
@@ -47,7 +47,7 @@ public class BlockingObjectPool {
     }
 
     /**
-     * Puts object to pool or blocks if pool is full * *
+     * Puts object to pool or blocks if pool is full
      *
      * @param object to be taken back to pool
      */
